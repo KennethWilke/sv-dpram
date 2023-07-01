@@ -1,0 +1,28 @@
+CAPI=2:
+name: kwilke:simple:sv-dpram:1.0.0
+description: A Dual Ported RAM module
+
+filesets:
+  rtl:
+    files:
+      - dpram.sv
+    file_type: systemVerilogSource
+  tb:
+    files:
+      - dpram_tb.sv
+    file_type: systemVerilogSource
+
+targets:
+  default: &default
+    filesets:
+      - rtl
+  sim:
+    <<: *default
+    default_tool: icarus
+    filesets_append:
+      - tb
+    toplevel: dpram_testbench
+    tools:
+      icarus:
+        iverilog_options:
+          - -g2012
